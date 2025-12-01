@@ -111,17 +111,19 @@ export default [
     name: 'tool',
     path: '/tool',
     routes: [
-      {
-        name: '导入表',
-        path: '/tool/gen/import',
-        component: './Tool/Gen/import',
-      },
-      {
-        name: '编辑表',
-        path: '/tool/gen/edit',
-        component: './Tool/Gen/edit',
-      },
+      { name: '导入表', path: '/tool/gen/import', component: './Tool/Gen/import' },
+      { name: '编辑表', path: '/tool/gen/edit', component: './Tool/Gen/edit' },
     ]
   },
-
+  {
+    name: 'daily-focus',
+    path: '/daily-focus',
+    routes: [
+      { 
+        name: '数字货币投资', 
+        path: '/daily-focus/crypto-investment', 
+        component: './DailyFocus/CryptoInvestment',
+      },
+    ]
+  }
 ];
