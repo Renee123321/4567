@@ -103,19 +103,31 @@ function CryptoInvestmentDashboard() {
   const [loading, setLoading] = useState(false);
   const [showSuggestionDetail, setShowSuggestionDetail] = useState(false);
   
+  // 删除模拟数据，使用真实API调用
+  
   // 加载数据
   const loadData = async () => {
     setLoading(true);
     try {
-      // 在实际环境中，这里会调用真实的API
-      // const portfolioResp = await cryptoInvestmentService.getPortfolioOverview();
-      // const newsResp = await cryptoInvestmentService.getMarketNews();
-      // const suggestionResp = await cryptoInvestmentService.getLatestInvestmentSuggestion();
-      // const historyResp = await cryptoInvestmentService.getHistoricalData({ days: 15 });
+      // 调用真实API
+      const portfolioResp = await cryptoInvestmentService.getPortfolioOverview();
+      const newsResp = await cryptoInvestmentService.getMarketNews();
+      const suggestionResp = await cryptoInvestmentService.getLatestInvestmentSuggestion();
+      const historyResp = await cryptoInvestmentService.getHistoricalData({ days: 15 });
       
-      // 使用模拟数据
-      // 模拟网络延迟
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // 更新状态
+      if (portfolioResp.data) {
+        setPortfolioData(portfolioResp.data);
+      }
+      if (newsResp.data) {
+        setMarketNews(newsResp.data);
+      }
+      if (suggestionResp.data) {
+        setInvestmentSuggestion(suggestionResp.data);
+      }
+      if (historyResp.data) {
+        setHistoricalData(historyResp.data);
+      }
       
       message.success('数据更新成功');
     } catch (error) {
@@ -125,19 +137,16 @@ function CryptoInvestmentDashboard() {
       setLoading(false);
     }
   };
-
+  
   // 审批建议
   const handleApproveSuggestion = async (status: 'approved' | 'rejected') => {
     try {
-      // 在实际环境中，这里会调用真实的API
-      // await cryptoInvestmentService.approveInvestmentSuggestion({
-      //   suggestionId: investmentSuggestion.id,
-      //   status,
-      // });
+      await cryptoInvestmentService.approveInvestmentSuggestion({
+        suggestionId: investmentSuggestion.id,
+        status,
+      });
       
-      // 模拟网络延迟
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      // 更新本地状态
       setInvestmentSuggestion({
         ...investmentSuggestion,
         status,

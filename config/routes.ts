@@ -116,13 +116,29 @@ export default [
     ]
   },
   {
-    name: 'daily-focus',
+    name: 'DailyFocus',
     path: '/daily-focus',
     routes: [
-      { 
-        name: '数字货币投资', 
-        path: '/daily-focus/crypto-investment', 
-        component: './DailyFocus/CryptoInvestment',
+      {
+        name: '数字货币投资',
+        path: '/daily-focus/crypto-investment',
+        routes: [
+          {
+            name: '投资仪表盘',
+            path: '/daily-focus/crypto-investment/dashboard',
+            component: './DailyFocus/CryptoInvestment/index',
+          },
+          {
+            name: '市场消息列表',
+            path: '/daily-focus/crypto-investment/market-news',
+            component: './DailyFocus/CryptoInvestment/MarketNewsList',
+          },
+          {
+            name: '投资建议报告',
+            path: '/daily-focus/crypto-investment/suggestion-report',
+            component: './DailyFocus/CryptoInvestment/SuggestionReport',
+          },
+        ],
       },
     ]
   }
